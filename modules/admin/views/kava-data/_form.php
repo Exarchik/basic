@@ -23,6 +23,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'summary')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
+        <?= ($model->isNewRecord ? '' : Html::a('<i class="fa fa-trash-o" aria-hidden="true"></i> Удалить', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Удалить этот отчет?',
+                'method' => 'post',
+            ],
+        ])) ?>
         <?= Html::submitButton(
                 $model->isNewRecord ? 
                 '<i class="fa fa-plus-square-o" aria-hidden="true"></i> Создать' : 

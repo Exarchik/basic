@@ -24,7 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('<i class="fa fa-backward" aria-hidden="true"></i> К списку', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('<i class="fa fa-backward" aria-hidden="true"></i> К списку', 
+            (strpos(Yii::$app->request->referrer,'update')?['index']:Yii::$app->request->referrer),
+            ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php
