@@ -23,7 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'client_ip',
-            'surname',
+            [
+                'attribute' => 'surname',
+                'format' => 'html',
+                'value' => function($data){
+                    return Html::a($data->surname, ['update','id' => $data->id]);
+                },
+            ],
             //'products:ntext',
             'order_time',
              'summary',

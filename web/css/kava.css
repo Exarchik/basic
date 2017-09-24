@@ -216,3 +216,6 @@ span.tmp-order-qty {
 .table-striped > tbody > tr:nth-of-type(even) td.even {
     background-color: #f9f9f9;
 }
+.container.container-admin{
+    padding:0px;
+}

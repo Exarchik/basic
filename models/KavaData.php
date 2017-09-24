@@ -53,4 +53,9 @@ class KavaData extends \yii\db\ActiveRecord
             'summary' => 'Summary',
         ];
     }
+    
+    public static function addLink($data)
+    {
+        return print_r($data,1);
+    }
 }

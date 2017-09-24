@@ -17,6 +17,14 @@ class KavaDataController extends Controller
     /**
      * @inheritdoc
      */
+    public function __construct($id, $module, $config = [])
+    {
+        $this->layout = 'main.php';
+        parent::__construct($id, $module, $config);
+    }
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
