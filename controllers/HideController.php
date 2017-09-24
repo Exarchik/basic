@@ -14,9 +14,16 @@ class HideController extends AppController
     
     public function actionElements(){
         
-        $model = Kava::find()->select('id,surname,summary')->all();
+        $query = Kava::find()->select('id,surname,summary');
+        $pages = new \yii\data\Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => 3,
+            'pageSizeParam' => false,
+            'forcePageParam' => false, 
+        ]);
+        $model = $query->offset($pages->offset)->limit($pages->limit)->all();
         
-        return $this->render('elements', compact('model'));
+        return $this->render('elements', compact('model','pages'));
     }
     
     public function actionElement($id){
