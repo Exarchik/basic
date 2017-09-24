@@ -1,0 +1,2 @@
+#RewriteEngine on
+#RewriteRule ^(.+)?$ /yii2/basic/web/$1
