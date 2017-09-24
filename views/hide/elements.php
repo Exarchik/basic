@@ -1,6 +1,7 @@
 <?php
 
 $this->title = 'Список элементов';
+$this->params['breadcrumbs'][] = 'Элементы';
 
 ?>
 <div class="container">

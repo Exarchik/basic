@@ -1,6 +1,11 @@
 <?php
 
 $this->title = 'Список элементов';
+$this->params['breadcrumbs'][] = [
+            'label' => 'Элементы',
+            'url' => ['hide/elements']
+];
+$this->params['breadcrumbs'][] = "($model->id) $model->surname";
 
 ?>
 <div class="container">
@@ -15,7 +20,7 @@ $this->title = 'Список элементов';
             if (!empty($model->products)) :
                 foreach (array_keys($model->products[0]) as $key=>$field) :
         ?>
-                <th><?=$field?><th>
+                <th><?=$types[$field]?><th>
         <?php
                 endforeach;
         ?>
@@ -24,11 +29,11 @@ $this->title = 'Список элементов';
                 foreach ($model->products as $key=>$product) :
         ?>
             <tr>
-                <td><?=$product['prod_type']?><td>
-                <td><?=$product['prod_price']?><td>
-                <td><?=$product['prod_qty']?><td>
-                <td><?=$product['prod_name']?><td>
-                <td><?=$product['prod_id']?><td>
+                <td class="even"><?=$types[$product['prod_type']]?><td>
+                <td class="odd"><?=$product['prod_price']?><td>
+                <td class="even">x <?=$product['prod_qty']?><td>
+                <td class="odd"><?=$product['prod_name']?><td>
+                <td class="even"><?=$product['prod_id']?><td>
             </tr>
         <?php
                 endforeach;
@@ -38,7 +43,9 @@ $this->title = 'Список элементов';
         </table>
       </div>
       <div class="panel-body">
-        <?=$model->summary?> денег
+        <div class="well">
+            <?=$model->summary?> денег
+        </div>
       </div>
     </div> 
 </div>

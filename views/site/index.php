@@ -34,7 +34,8 @@ $this->title = 'My Yii Application ';
 </div>
 <div class="main-container container" style="padding:20px;">
 	<div class="row">
-        <?php/*
+        <?php
+        /*
         $sum = 12234242.141;
         echo \Yii::t('app', 'Balance: {0, number, ##,#,###,####.##} <br/>', $sum);
         echo \Yii::t('app', 'Today is {0, date,yyyy-MM-dd} ({0, date, short}) <br/>', time());
@@ -51,7 +52,8 @@ $this->title = 'My Yii Application ';
             'name'   => 'Василиса',
             'gender' => 'женщина',
         ]); 
-        */?>
+        */
+        ?>
 		<div class="form-group">
 		  <label for="surname-data">Прізвище:</label>
 		  <span class="errors error-surname"></span>

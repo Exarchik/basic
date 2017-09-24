@@ -203,7 +203,16 @@ span.tmp-order-qty {
     background-color: #fff;
     border-radius: 29px;
 }
+
+
 .panelko{
     display: inline-block;
     width:33%;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) td.even {
+    background-color: #eeeeee;
+}
+.table-striped > tbody > tr:nth-of-type(even) td.even {
+    background-color: #f9f9f9;
 }
