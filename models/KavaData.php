@@ -54,8 +54,26 @@ class KavaData extends \yii\db\ActiveRecord
         ];
     }
     
-    public static function addLink($data)
+    
+    public static function viewProducts($data)
     {
-        return print_r($data,1);
+        $html = '<table class="table table-stripped">';
+        $html .= "<tr>";
+        foreach (array_keys($data[0]) as $key=>$field) :
+            $html .= "<th>$field</th>";
+        endforeach;
+        foreach ($data as $key=>$product) :
+            $html .= "<tr>";
+            $html .= "<td class='even'>".$product['prod_type']."</td>";
+            $html .= "<td class='odd'>".$product['prod_price']."</td>";
+            $html .= "<td class='even'>".$product['prod_qty']."</td>";
+            $html .= "<td class='odd'>".$product['prod_name']."</td>";
+            $html .= "<td class='even'>".$product['prod_id']."</td>";
+            $html .= "</tr>";
+        endforeach;
+        $html .= "</tr>";
+        $html .= '</table>';
+        return $html;
     }
+    
 }

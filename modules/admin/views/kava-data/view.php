@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\KavaData */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Kava Datas', 'url' => ['index']];
+$this->title = $model->id.' - '.$model->surname;
+$this->params['breadcrumbs'][] = ['label' => 'Отчеты кафе', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -16,14 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<i class="fa fa-trash-o" aria-hidden="true"></i> Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Удалить этот отчет?',
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('<i class="fa fa-backward" aria-hidden="true"></i> К списку', ['index'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php
@@ -34,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'client_ip',
                 'surname',
-                'products:ntext',
+                [
+                    'attribute' => 'products',
+                    'format' => 'html',
+                    'value' => function ($data){
+                        return \app\models\KavaData::viewProducts($data->products);
+                    }
+                ],
                 'order_time',
                 'summary',
             ],

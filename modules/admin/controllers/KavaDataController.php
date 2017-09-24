@@ -59,8 +59,11 @@ class KavaDataController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->products = unserialize($model->products); 
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

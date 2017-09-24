@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\KavaData */
 
-$this->title = 'Update Kava Data: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Kava Datas', 'url' => ['index']];
+$this->title = 'Изменить отчет: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Отчеты кафе', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="kava-data-update">
 

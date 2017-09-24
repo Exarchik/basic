@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\KavaData */
 
-$this->title = 'Create Kava Data';
-$this->params['breadcrumbs'][] = ['label' => 'Kava Datas', 'url' => ['index']];
+$this->title = 'Создать отчет';
+$this->params['breadcrumbs'][] = ['label' => 'Отчеты кафе', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kava-data-create">
