@@ -37,9 +37,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Admin', 'url' => ['/admin']],
-            ['label' => 'KavaData', 'url' => ['/admin/kava-data']],
-            ['label' => 'Kava FooDrink', 'url' => ['/admin/kava-foodrink']],
+            ['label' => 'Админка', 'url' => ['/admin']],
+            ['label' => 'Отчеты', 'url' => ['/admin/kava-data']],
+            ['label' => 'Товары', 'url' => ['/admin/kava-foodrink']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
