@@ -10,6 +10,14 @@ use yii\web\Controller;
 class DefaultController extends Controller
 {
     /**
+     * @inheritdoc
+     */
+    public function __construct($id, $module, $config = [])
+    {
+        $this->layout = 'main.php';
+        parent::__construct($id, $module, $config);
+    }
+    /**
      * Renders the index view for the module
      * @return string
      */
