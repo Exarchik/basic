@@ -21,9 +21,10 @@ class HideController extends AppController
     
     public function actionElement($id){
         
-        $model = Kava::findOne('id = $d',$id);
+        $model = Kava::find()->where(['id' => $id])->one();
+        $model->products = unserialize($model->products);
         
-        return $this->render('elements', compact('model'));
+        return $this->render('element', compact('model'));
     }
     
     public function actionIndex($prof = null)

@@ -10,8 +10,6 @@ $this->title = 'Список элементов';
 <br />
 
 <?php
-
-debug($model);
  
     if (!empty($model)) :
         foreach ($model as $element) :
