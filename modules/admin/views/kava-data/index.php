@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'surname',
                 'format' => 'html',
                 'value' => function($data){
-                    return Html::a($data->surname, ['update','id' => $data->id]);
+                    return  Html::a('(<i class="fa fa-eye" aria-hidden="true"></i>)', ['view','id' => $data->id])."&nbsp;".
+                            Html::a($data->surname, ['update','id' => $data->id]);
                 },
             ],
             //'products:ntext',

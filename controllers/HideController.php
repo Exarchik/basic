@@ -17,7 +17,7 @@ class HideController extends AppController
         $query = Kava::find()->select('id,surname,summary');
         $pages = new \yii\data\Pagination([
             'totalCount' => $query->count(),
-            'pageSize' => 3,
+            'pageSize' => 9,
             'pageSizeParam' => false,
             'forcePageParam' => false, 
         ]);
