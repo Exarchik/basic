@@ -91,6 +91,14 @@ class KavaFoodrinkController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        if ( $post = Yii::$app->request->post() ){
+            $post = $post['KavaFoodrink'];
+            $model->price = $post['priceHrn'] + $post['priceCoin'] / 100; 
+        }else{
+            $model->priceHrn = floor($model->price);
+            $model->priceCoin = round(($model->price - $model->priceHrn)*100);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

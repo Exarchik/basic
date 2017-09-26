@@ -14,7 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'priceHrn')->textInput(['style'=>'width:60px'])->label(false) ?>
+    
+    <?= $form->field($model, 'priceCoin')->textInput(['style'=>'width:60px'])->label(false) ?>
 
     <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 

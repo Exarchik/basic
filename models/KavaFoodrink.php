@@ -15,6 +15,10 @@ use Yii;
  */
 class KavaFoodrink extends \yii\db\ActiveRecord
 {
+    public $priceHrn = 0;
+    
+    public $priceCoin = 0;
+    
     /**
      * @inheritdoc
      */
@@ -30,7 +34,8 @@ class KavaFoodrink extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'price', 'img', 'type'], 'required'],
-            [['price'], 'number'],
+            [['price','priceHrn','priceCoin'], 'number'],
+            [['priceCoin'], 'number', 'max'=>99],
             [['name'], 'string', 'max' => 50],
             [['img'], 'string', 'max' => 150],
             [['type'], 'string', 'max' => 10],
