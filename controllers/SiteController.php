@@ -10,6 +10,9 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\MyForm;
+use app\models\KavaFoodrink;
+use app\models\KavaPersons;
+use app\models\KavaData;
 
 class SiteController extends Controller
 {
@@ -62,17 +65,50 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        /*
-        //Yii::$app->
-        $this->view->registerCssFile('css/kava.css');
-        $this->view->registerCssFile('css/font-awesome.css');
-        
-        //$this->view->requiredJsFile('js/jquery-2.1.4.js',['POS_END']);
-        //\yii\web\JqueryAsset::register($this);
-        
-        $this->view->registerJsFile('js/kava.js');
-        */
+
         return $this->render('index');
+    }
+
+    /**
+     * Js generator
+     * 
+     * @return
+     */
+    public function actionJs()
+    {
+        $this->layout = false;
+        
+        $persons = KavaPersons::find()->all();
+        $napois = KavaFoodrink::find()->where(['type'=>'napoi'])->all();
+        $snacks = KavaFoodrink::find()->where(['type'=>'snack'])->all();
+        
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        Yii::$app->response->headers->add('Content-Type', 'text/javascript; charset=utf-8');
+
+        return $this->render('js',compact('persons','napois','snacks'));
+    }
+
+    public function actionAjaxRequest()
+    {
+        $post = Yii::$app->request->post();
+        if (isset($post)){
+            $model = new KavaData();
+            $_tmp = [];
+      		// IP-адресс с которого сделан заказ
+    		$_tmp['KavaData']['client_ip'] = $post['remote_addr'];
+            // fio клиента
+            $_tmp['KavaData']['surname'] = $post['client'];
+    		// заказ клиента
+    		$_tmp['KavaData']['products'] = serialize($post['order']);
+            // общая сумма заказа
+    		$_tmp['KavaData']['summary'] = $post['price'];
+            
+             if ($model->load($_tmp) && $model->save()) {
+                print '<div class="kava-data">1</div>';
+            } else {
+                print '<div class="no-data">0</div>';
+            }
+        }
     }
 
     /**
@@ -134,17 +170,17 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-    
+
     /**
      * SiteController::actionHello()
-     * 
+     *
      * @param string $message
      * @return
      */
     public function actionHello($message = 'DoYouLikeCoding?',$flash='Some information')
     {
         Yii::$app->session->setFlash('q-msg',$flash);
-        
+
         return $this->render('hello',
             [
                 'message'  =>   $message,
@@ -152,26 +188,26 @@ class SiteController extends Controller
             ]
         );
     }
-    
+
     /**
      * SiteController::actionForm()
-     * 
+     *
      * @return
      */
     public function actionForm()
     {
         $form = new MyForm();
-        
+
         if($form->load(Yii::$app->request->post()) && $form->validate()){
             $name = Html::encode($form->name);
             $email = Html::encode($form->email);
             $senddata = ['name'=>$name,'email'=>$email];
         }
-        
+
         return $this->render('form',[
             'form' => $form,
             'data' => $senddata,
-        ]); 
+        ]);
     }
-    
+
 }

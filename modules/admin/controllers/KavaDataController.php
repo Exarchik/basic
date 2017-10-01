@@ -122,6 +122,12 @@ class KavaDataController extends Controller
         }
     }
 
+    public function actionDeleteMultiple($ids)
+    {
+        //$this->findModel($ids)->delete();
+        
+        return $this->redirect(['index']);
+    }
     /**
      * Deletes an existing KavaData model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

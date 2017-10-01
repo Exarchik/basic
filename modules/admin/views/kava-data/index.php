@@ -20,7 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            [
+            'class' => 'yii\grid\CheckboxColumn', 'checkboxOptions' => function($data) {
+                    return ['value' => $data->id];
+                },
+            ],
             'id',
             'client_ip',
             [

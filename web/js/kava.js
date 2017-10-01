@@ -16,7 +16,8 @@ timer_end = 1;
 // server sending packages link 
 /* access_key находится в data.js */
 //serverLink = "http://kava.deps.ua/index.php?option=com_exussalebanner&controller=exussalebanner&task=kava&view=exussalebanner&Itemid=1906&action=send_order&tmpl=content&key="+access_key;
-serverLink = "http://localhost/GIT/kava/check.php?action=order_send&key="+access_key;
+//serverLink = "http://localhost/GIT/kava/check.php?action=order_send&key="+access_key;
+serverLink = "http://localhost/yii2/basic/web/index.php?r=site/ajax-request";
 
 jQuery(function(){
 	

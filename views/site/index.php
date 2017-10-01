@@ -3,7 +3,29 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application ';
+$remote_addr = $_SERVER['REMOTE_ADDR'];
 ?>
+<script> var remote_addr='<?=$remote_addr?>'; var keyboard_list = [0,1,2,3,4,5,6,7,8,9,10];
+function pull_in(_array,_data){
+	if (_data.length){
+		_array.shift();
+		_array.push(_data);
+	}
+}
+function detect_enter_push(kl){
+	if (kl[kl.length-1]=='Enter'){
+		//console.log('enter detected!');
+		var _keys = kl;
+		//console.log(_keys);
+		var _keycode = _keys.join('');
+		//console.log(_keycode.slice(0,10));
+		var _s_code = _keycode.slice(0,10);
+		if (surnames_codes[_s_code]!=undefined){
+			getName(surnames_codes[_s_code]);
+		}
+	}
+}
+</script>
 <div class="darkness">&nbsp;</div>
 <div class="kava-loader" style="display:none;" ><img src='images/img_loader.gif'></div>
 <div class="kava-msg kava-success" style="display:none;">

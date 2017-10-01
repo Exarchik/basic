@@ -23,7 +23,8 @@ class AppAsset extends AssetBundle
         'css/font-awesome.css',
     ];
     public $js = [
-        'js/kava.js'
+        'js/kava.js',
+        'index.php?r=site/js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
