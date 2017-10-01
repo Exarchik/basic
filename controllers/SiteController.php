@@ -94,13 +94,13 @@ class SiteController extends Controller
         if (isset($post)){
             $model = new KavaData();
             $_tmp = [];
-      		// IP-àäğåññ ñ êîòîğîãî ñäåëàí çàêàç
+      		// IP-Ğ°Ğ´Ñ€ĞµÑÑ Ñ ĞºĞ¾Ñ‚Ğ¾Ñ€Ğ¾Ğ³Ğ¾ ÑĞ´ĞµĞ»Ğ°Ğ½ Ğ·Ğ°ĞºĞ°Ğ·
     		$_tmp['KavaData']['client_ip'] = $post['remote_addr'];
-            // fio êëèåíòà
+            // fio ĞºĞ»Ğ¸ĞµĞ½Ñ‚Ğ°
             $_tmp['KavaData']['surname'] = $post['client'];
-    		// çàêàç êëèåíòà
+    		// Ğ·Ğ°ĞºĞ°Ğ· ĞºĞ»Ğ¸ĞµĞ½Ñ‚Ğ°
     		$_tmp['KavaData']['products'] = serialize($post['order']);
-            // îáùàÿ ñóììà çàêàçà
+            // Ğ¾Ğ±Ñ‰Ğ°Ñ ÑÑƒĞ¼Ğ¼Ğ° Ğ·Ğ°ĞºĞ°Ğ·Ğ°
     		$_tmp['KavaData']['summary'] = $post['price'];
             
              if ($model->load($_tmp) && $model->save()) {
