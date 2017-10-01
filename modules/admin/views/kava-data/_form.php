@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\jui\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\KavaData */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,9 +18,28 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'products')->textarea(['rows' => 6, 'disabled'=>'disabled', 'style'=>'color:#aaa;']) ?>
+    <?/*= $form->field($model, 'products')->textarea(['rows' => 6, 'disabled'=>'disabled', 'style'=>'color:#aaa;']) */?>
+    
+    <?= $form->field($model, 'products')->render(
+        function ($content){
+            foreach($content->model->products as $k1 => $product) :
+            ?>
+                <div class="KavaData_product KavaData_product_<?=$k1?>">
+            <?php
+                    foreach ($product as $k2 => $fieldData) :
+                ?>
+                    <input name="KavaData[products][<?=$k1?>][<?=$k2?>]" value="<?=$fieldData?>" />
+                <?php
+                    endforeach;
+            ?>
+                </div>
+            <?php
+            endforeach;
+        }
+    ) ?>
 
     <?= $form->field($model, 'order_time')->textInput() ?>
+    <?//= $form->field($model, 'order_time')->widget(\yii\jui\DatePicker::classname()) ?>
 
     <?= $form->field($model, 'summary')->textInput(['maxlength' => true]) ?>
 

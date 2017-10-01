@@ -7,9 +7,9 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
+use app\assets\AdminAsset;
 
-AppAsset::register($this);
+AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -40,6 +40,7 @@ AppAsset::register($this);
             ['label' => 'Админка', 'url' => ['/admin']],
             ['label' => 'Отчеты', 'url' => ['/admin/kava-data']],
             ['label' => 'Товары', 'url' => ['/admin/kava-foodrink']],
+            ['label' => 'Клиенты', 'url' => ['/admin/kava-persons']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -55,7 +56,13 @@ AppAsset::register($this);
         ],
     ]);
     NavBar::end();
+    
+    
+    //print_r(Yii::$app->user);
+    
     ?>
+
+
 
     <div class="container container-admin">
         <?= Breadcrumbs::widget([

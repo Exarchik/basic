@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\KavaFoodrink */
+/* @var $model app\models\KavaPersons */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Список товаров', 'url' => ['index']];
-$this->params['breadcrumbs'][] = Html::decode($this->title);
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="kava-foodrink-view">
+<div class="kava-persons-view">
 
-    <h1>Товар: #<?= Html::encode($this->title) ?></h1>
+    <h1>Клиент: #<?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<i class="fa fa-trash-o" aria-hidden="true"></i> Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Удалить этот отчет?',
+                'confirm' => 'Удалить этого клиента?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -32,10 +32,8 @@ $this->params['breadcrumbs'][] = Html::decode($this->title);
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'price',
-            'img',
-            'type',
+            'fio',
+            'deps_code',
         ],
     ]) ?>
 

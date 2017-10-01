@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\KavaData;
+use app\models\KavaPersons;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * KavaDataController implements the CRUD actions for KavaData model.
+ * KavaPersonsController implements the CRUD actions for KavaPersons model.
  */
-class KavaDataController extends Controller
+class KavaPersonsController extends Controller
 {
     /**
      * @inheritdoc
@@ -39,43 +39,40 @@ class KavaDataController extends Controller
     }
 
     /**
-     * Lists all KavaData models.
+     * Lists all KavaPersons models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => KavaData::find(),
+            'query' => KavaPersons::find(),
         ]);
-        
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single KavaData model.
+     * Displays a single KavaPersons model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        $model->products = unserialize($model->products); 
-        
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new KavaData model.
+     * Creates a new KavaPersons model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new KavaData();
+        $model = new KavaPersons();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -87,7 +84,7 @@ class KavaDataController extends Controller
     }
 
     /**
-     * Updates an existing KavaData model.
+     * Updates an existing KavaPersons model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,20 +92,8 @@ class KavaDataController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if (Yii::$app->request->post()){
-            $post = Yii::$app->request->post();
-            $post['KavaData']['products'] = serialize($post['KavaData']['products']);
-        }else{
-            $model->products = unserialize($model->products);
-        }
 
-        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        if ($model->load($post) && $model->save()) {
-            /*
-            print_r($post);
-            print_r($model->product)
-            */
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -118,7 +103,7 @@ class KavaDataController extends Controller
     }
 
     /**
-     * Deletes an existing KavaData model.
+     * Deletes an existing KavaPersons model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -131,15 +116,15 @@ class KavaDataController extends Controller
     }
 
     /**
-     * Finds the KavaData model based on its primary key value.
+     * Finds the KavaPersons model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return KavaData the loaded model
+     * @return KavaPersons the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = KavaData::findOne($id)) !== null) {
+        if (($model = KavaPersons::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

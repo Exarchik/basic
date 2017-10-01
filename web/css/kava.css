@@ -205,11 +205,14 @@ span.tmp-order-qty {
 }
 
 
+
+
+
+
 .panelko{
     display: inline-block;
     width:33%;
 }
-
 .table-striped > tbody > tr:nth-of-type(odd) td.even {
     background-color: #eeeeee;
 }
@@ -217,5 +220,12 @@ span.tmp-order-qty {
     background-color: #f9f9f9;
 }
 .container.container-admin{
-    padding:0px;
+    padding: 0px;
+}
+.short-input{
+    display: inline-block;
+}
+.fa.fa-4 {
+    font-size: 7em;
+    display: block;
 }
