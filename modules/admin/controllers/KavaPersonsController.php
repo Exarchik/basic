@@ -46,6 +46,11 @@ class KavaPersonsController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => KavaPersons::find(),
+            'pagination' => [
+                'pageSize' => 10,
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+            ],
         ]);
 
         return $this->render('index', [

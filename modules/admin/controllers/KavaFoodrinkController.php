@@ -45,6 +45,11 @@ class KavaFoodrinkController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => KavaFoodrink::find(),
+            'pagination' => [
+                'pageSize' => 10,
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+            ],
         ]);
 
         return $this->render('index', [
