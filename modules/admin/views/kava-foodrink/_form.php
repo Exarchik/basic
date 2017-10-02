@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="kava-foodrink-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype'=>'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -21,8 +21,9 @@ use yii\widgets\ActiveForm;
         ->textInput(['style'=>'width:60px'])->label(false) ?>
 
     <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'imgFile')->fileInput([])->label(false) ?>
 
-    <?= $form->field($model, 'type')->dropDownList(['napoi'=>'napoi','snack'=>'snack']) ?>
+    <?= $form->field($model, 'type')->dropDownList($model->foodTypes) ?>
 
     <div class="form-group">
         <?= ($model->isNewRecord ? '' : Html::a('<i class="fa fa-trash-o" aria-hidden="true"></i> Удалить', ['delete', 'id' => $model->id], [

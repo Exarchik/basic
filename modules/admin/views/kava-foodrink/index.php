@@ -25,7 +25,12 @@ $this->params['breadcrumbs'][] = Html::encode($this->title);
             'name',
             'price',
             'img',
-            'type',
+            [
+                'attribute' => 'type',
+                'value' => function ($data){
+                    return $data->foodTypes[$data->type];
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

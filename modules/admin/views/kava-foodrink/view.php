@@ -35,7 +35,12 @@ $this->params['breadcrumbs'][] = Html::decode($this->title);
             'name',
             'price',
             'img',
-            'type',
+            [
+                'attribute' => 'type',
+                'value' => function ($data){
+                    return $data->foodTypes[$data->type];
+                }
+            ],
         ],
     ]) ?>
 

@@ -19,6 +19,12 @@ class KavaFoodrink extends \yii\db\ActiveRecord
     
     public $priceCoin = 0;
     
+    public $imgFile;
+    
+    public $foodTypes = ['napoi'=>'Напиток','snack'=>'Снек'];
+    
+    public $imgPath = "elements-images/";
+    
     /**
      * @inheritdoc
      */
@@ -26,6 +32,11 @@ class KavaFoodrink extends \yii\db\ActiveRecord
     {
         return '_kava_foodrink';
     }
+
+    public function imgPath()
+    {
+        return \Yii::$app->basePath."\\web\\".$this->imgPath;
+    } 
 
     /**
      * @inheritdoc
@@ -38,6 +49,7 @@ class KavaFoodrink extends \yii\db\ActiveRecord
             [['priceCoin'], 'number', 'max'=>99],
             [['name'], 'string', 'max' => 50],
             [['img'], 'string', 'max' => 150],
+            [['imgFile'], 'file', 'extensions' => 'gif, jpg'],
             [['type'], 'string', 'max' => 10],
         ];
     }

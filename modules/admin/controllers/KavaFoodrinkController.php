@@ -6,6 +6,7 @@ use Yii;
 use app\models\KavaFoodrink;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -96,10 +97,55 @@ class KavaFoodrinkController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->priceHrn = floor($model->price);
+        $model->priceCoin = round(($model->price - $model->priceHrn)*100);
         
+        $_tmpPost = [];
+        if (Yii::$app->request->isPost){
+            $_tmpPost = Yii::$app->request->post();
+            
+            $model->imgFile = UploadedFile::getInstance($model, 'imgFile');
+            
+            if ($model->imgFile && $model->validate()) {
+                $imgSavePath = $model->imgPath() . $model->imgFile->name;
+                $imgPath = $model->imgPath . $model->imgFile->name;
+                $model->imgFile->saveAs($imgSavePath);
+                $_tmpPost['KavaFoodrink']['img'] = $imgPath;
+            }
+            $model->price = $_tmpPost['KavaFoodrink']['priceHrn'] 
+                    + $_tmpPost['KavaFoodrink']['priceCoin'] / 100;
+
+            
+            if ($model->load($_tmpPost) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } 
+
+        }else{
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+        /*
         if ( $post = Yii::$app->request->post() ){
+            $model->imgFile = UploadedFile::getInstance($model, 'imgFile');
+            
+            if ($model->imgFile && $model->validate()) {
+                //
+                $imgSavePath = $model->imgPath() . $model->imgFile->name;
+                $imgPath = $model->imgPath . $model->imgFile->name;
+                $model->imgFile->saveAs($imgSavePath);
+                $model->img = $imgPath;
+                
+            }
+            
             $post = $post['KavaFoodrink'];
-            $model->price = $post['priceHrn'] + $post['priceCoin'] / 100; 
+            $model->price = $post['priceHrn'] + $post['priceCoin'] / 100;
+            
+            
+            
+            debug($model); die();
+             
         }else{
             $model->priceHrn = floor($model->price);
             $model->priceCoin = round(($model->price - $model->priceHrn)*100);
@@ -112,6 +158,7 @@ class KavaFoodrinkController extends Controller
                 'model' => $model,
             ]);
         }
+        */
     }
 
     /**
