@@ -78,14 +78,29 @@ class KavaFoodrinkController extends Controller
     public function actionCreate()
     {
         $model = new KavaFoodrink();
+        
+        if (Yii::$app->request->isPost){
+            $_tmpPost = Yii::$app->request->post();
+            
+            if ($tmpFilePath = $model->loadFoodImg('imgFile')){
+                $_tmpPost['KavaFoodrink']['img'] = $tmpFilePath;
+            }
+            $_tmpPost['KavaFoodrink']['price'] = $_tmpPost['KavaFoodrink']['priceHrn'] 
+                    + $_tmpPost['KavaFoodrink']['priceCoin'] / 100;
+            
+            if ($model->load($_tmpPost) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+        
     }
 
     /**
@@ -100,65 +115,27 @@ class KavaFoodrinkController extends Controller
         $model->priceHrn = floor($model->price);
         $model->priceCoin = round(($model->price - $model->priceHrn)*100);
         
-        $_tmpPost = [];
         if (Yii::$app->request->isPost){
             $_tmpPost = Yii::$app->request->post();
             
-            $model->imgFile = UploadedFile::getInstance($model, 'imgFile');
-            
-            if ($model->imgFile && $model->validate()) {
-                $imgSavePath = $model->imgPath() . $model->imgFile->name;
-                $imgPath = $model->imgPath . $model->imgFile->name;
-                $model->imgFile->saveAs($imgSavePath);
-                $_tmpPost['KavaFoodrink']['img'] = $imgPath;
+            if ($tmpFilePath = $model->loadFoodImg('imgFile')){
+                $_tmpPost['KavaFoodrink']['img'] = $tmpFilePath;
             }
             $model->price = $_tmpPost['KavaFoodrink']['priceHrn'] 
                     + $_tmpPost['KavaFoodrink']['priceCoin'] / 100;
 
-            
             if ($model->load($_tmpPost) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
-            } 
-
-        }else{
-
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-        /*
-        if ( $post = Yii::$app->request->post() ){
-            $model->imgFile = UploadedFile::getInstance($model, 'imgFile');
-            
-            if ($model->imgFile && $model->validate()) {
-                //
-                $imgSavePath = $model->imgPath() . $model->imgFile->name;
-                $imgPath = $model->imgPath . $model->imgFile->name;
-                $model->imgFile->saveAs($imgSavePath);
-                $model->img = $imgPath;
-                
             }
-            
-            $post = $post['KavaFoodrink'];
-            $model->price = $post['priceHrn'] + $post['priceCoin'] / 100;
-            
-            
-            
-            debug($model); die();
-             
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }else{
-            $model->priceHrn = floor($model->price);
-            $model->priceCoin = round(($model->price - $model->priceHrn)*100);
-        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
-        */
     }
 
     /**

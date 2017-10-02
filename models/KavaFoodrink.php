@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "_kava_foodrink".
@@ -38,13 +39,28 @@ class KavaFoodrink extends \yii\db\ActiveRecord
         return \Yii::$app->basePath."\\web\\".$this->imgPath;
     } 
 
+    public function loadFoodImg($fileField)
+    {
+        $this->$fileField = UploadedFile::getInstance($this, $fileField);
+            
+        if ($this->$fileField) {
+            $imgSavePath = $this->imgPath() . $this->$fileField->name;
+            $imgPath = $this->imgPath . $this->$fileField->name;
+            $this->$fileField->saveAs($imgSavePath);
+            
+            return $imgPath;
+        }
+        return false;
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'price', 'img', 'type'], 'required'],
+            [['name', 'price', 'img', 'type'], 'required','on'=>'update'],
+            [['name', 'price', 'type'], 'required','on'=>'create'],
             [['price','priceHrn','priceCoin'], 'number'],
             [['priceCoin'], 'number', 'max'=>99],
             [['name'], 'string', 'max' => 50],

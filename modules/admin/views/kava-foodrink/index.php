@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = Html::encode($this->title);
 ?>
 <div class="kava-foodrink-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= Html::tag('h1', $this->title ); ?>
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square-o" aria-hidden="true"></i> Создать товар', ['create'], ['class' => 'btn btn-success']) ?>
@@ -22,9 +22,15 @@ $this->params['breadcrumbs'][] = Html::encode($this->title);
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name',
+            [
+                'attribute'=>'name',
+                'format'=>'html',
+            ],
             'price',
-            'img',
+            [
+                'attribute'=>'img',
+                'format'=>'image',
+            ],
             [
                 'attribute' => 'type',
                 'value' => function ($data){

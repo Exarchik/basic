@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = Html::decode($this->title);
 ?>
 <div class="kava-foodrink-view">
 
-    <h1>Товар: #<?= Html::encode($this->title) ?></h1>
+    <?= Html::tag('h1', "Товар: #".$this->title ); ?>
 
     <p>
         <?= Html::a('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -32,9 +32,15 @@ $this->params['breadcrumbs'][] = Html::decode($this->title);
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
+            [
+                'attribute'=>'name',
+                'format'=>'html',
+            ],
             'price',
-            'img',
+            [
+                'attribute'=>'img',
+                'format'=>'image',
+            ],
             [
                 'attribute' => 'type',
                 'value' => function ($data){

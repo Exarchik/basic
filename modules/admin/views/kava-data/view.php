@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kava-data-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= Html::tag('h1', $this->title ); ?>
 
     <p>
         <?= Html::a('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
