@@ -57,9 +57,6 @@ AdminAsset::register($this);
     ]);
     NavBar::end();
     
-    
-    //print_r(Yii::$app->user);
-    
     ?>
 
 
@@ -67,6 +64,10 @@ AdminAsset::register($this);
     <div class="container container-admin">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'homeLink' => [
+                'label' => 'Админка',
+                'url' => ['/admin']
+            ]
         ]) ?>
         <?= $content ?>
     </div>
