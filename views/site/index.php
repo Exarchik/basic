@@ -1,10 +1,32 @@
 <?php
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application ';
 $remote_addr = $_SERVER['REMOTE_ADDR'];
+
+Modal::begin([
+    'id' => 'login-modal',
+    'header' => 'Login',
+    'toggleButton' => [
+       'label' => 'Label Button',
+       'class' => 'btn btn-success',
+       'style' => 'position: absolute'
+    ],
+    //'footer' => 'Footer modal',
+]);
+
+echo $form;
+
+Modal::end();
+
 ?>
+<style>
+.navbar-kaffee{
+    top:104px;
+}
+</style>
 <script> var remote_addr='<?=$remote_addr?>'; var keyboard_list = [0,1,2,3,4,5,6,7,8,9,10];
 function pull_in(_array,_data){
 	if (_data.length){

@@ -65,8 +65,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        return $this->render('index');
+        $model = new LoginForm(); 
+        $form = $this->renderPartial('//site/_login',['model' => $model]);
+        return $this->render('index', ['form' => $form]);
     }
 
     /**
@@ -90,23 +91,25 @@ class SiteController extends Controller
 
     public function actionAjaxRequest()
     {
-        $post = Yii::$app->request->post();
-        if (isset($post)){
-            $model = new KavaData();
-            $_tmp = [];
-      		// IP-адресс с которого сделан заказ
-    		$_tmp['KavaData']['client_ip'] = $post['remote_addr'];
-            // fio клиента
-            $_tmp['KavaData']['surname'] = $post['client'];
-    		// заказ клиента
-    		$_tmp['KavaData']['products'] = serialize($post['order']);
-            // общая сумма заказа
-    		$_tmp['KavaData']['summary'] = $post['price'];
-            
-             if ($model->load($_tmp) && $model->save()) {
-                print '<div class="kava-data">1</div>';
-            } else {
-                print '<div class="no-data">0</div>';
+        if (Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            if (isset($post)){
+                $model = new KavaData();
+                $_tmp = [];
+          		// IP-адресс с которого сделан заказ
+        		$_tmp['KavaData']['client_ip'] = $post['remote_addr'];
+                // fio клиента
+                $_tmp['KavaData']['surname'] = $post['client'];
+        		// заказ клиента
+        		$_tmp['KavaData']['products'] = serialize($post['order']);
+                // общая сумма заказа
+        		$_tmp['KavaData']['summary'] = $post['price'];
+                
+                 if ($model->load($_tmp) && $model->save()) {
+                    print '<div class="kava-data">1</div>';
+                } else {
+                    print '<div class="no-data">0</div>';
+                }
             }
         }
     }

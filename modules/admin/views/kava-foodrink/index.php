@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = Html::encode($this->title);
             [
                 'attribute'=>'img',
                 'format'=>'image',
+                'options'=>['style'=>'width:70px'],
             ],
             [
                 'attribute' => 'type',
